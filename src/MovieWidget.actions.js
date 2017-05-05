@@ -1,7 +1,6 @@
 import $ from 'jquery';
 
 export function search(query) {
-    console.log('Query: ' + query);
     return function(dispatch) {
 
         dispatch({ type: 'fetching_data' });

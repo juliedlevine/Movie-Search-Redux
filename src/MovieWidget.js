@@ -20,12 +20,12 @@ export default class MovieWidget extends React.Component {
                     <div></div>}
 
                 {this.props.results.slice(0, 6).map((movie, idx) =>
-                    <div className="eachMovie">
+                    <div key={movie.release_date} className="eachMovie">
                         <div className="movieText">
                             <p key={idx}>{movie.title}</p>
                             <p key={movie.release_date}>Release Date:<br/>{movie.release_date}</p>
                         </div>
-                        {movie.poster_path ? <img src={"http://image.tmdb.org/t/p/w185/" + movie.poster_path}></img> : <img src={'/poster.png'}></img>}
+                        {movie.poster_path ? <img src={"http://image.tmdb.org/t/p/w185/" + movie.poster_path}></img> : <img alt={movie.title} src={'/poster.png'}></img>}
                     </div>)}
                 </div>
                 <div className="clearfix"></div>
