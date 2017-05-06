@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+// All dispatched types in this file should match what's in the reducer
 export function search(query) {
     return function(dispatch) {
 
@@ -33,4 +34,15 @@ export function typing(event) {
         type: 'typing',
         change: change
     }
+}
+
+export function details(idx) {
+    return {
+        type: 'details',
+        index: idx
+    }
+}
+
+export function back() {
+    return { type: 'back' }
 }

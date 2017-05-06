@@ -23,7 +23,8 @@ const MovieWidgetContainer = ReactRedux.connect(
         query: state.query,
         results: state.results,
         error: state.error,
-        isFetching: state.isFetching
+        isFetching: state.isFetching,
+        detailedResults: state.detailedResults
      }),
     actions
 )(MovieWidget);

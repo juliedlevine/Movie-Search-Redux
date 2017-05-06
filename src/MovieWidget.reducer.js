@@ -1,10 +1,13 @@
+// Initial state here shoudl match what's in the connect state in index.js
 const INITIAL_STATE = {
     query: '',
     results: [],
     error: '',
-    isFetching: false
+    isFetching: false,
+    detailedResults: null
 }
 
+// All action types here should match what's in the action file
 export default function movieWidgetReducer(state = INITIAL_STATE, action) {
 
     if (action.type === 'typing') {
@@ -31,6 +34,14 @@ export default function movieWidgetReducer(state = INITIAL_STATE, action) {
             isFetching: false
         });
 
+    } else if (action.type === 'details') {
+        return Object.assign({}, state, {
+            detailedResults: state.results[action.index]
+        });
+    } else if (action.type === 'back') {
+        return Object.assign({}, state, {
+            detailedResults: null
+        });
     } else {
         return state;
     }
