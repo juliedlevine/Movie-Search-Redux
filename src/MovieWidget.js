@@ -13,7 +13,9 @@ const MovieWidget = ({ typing, search, query, isFetching, results, error, detail
 
             <div className="results">
                 <h3>{detailedResults.title}</h3>
-                <img src={"http://image.tmdb.org/t/p/w185/" + detailedResults.poster_path}></img>
+                {detailedResults.poster_path ?
+                    <img src={"http://image.tmdb.org/t/p/w185/" + detailedResults.poster_path}></img> :
+                    <img alt={detailedResults.title} src={'/poster.png'}></img>}
                 <p>Release Date: {detailedResults.release_date}</p>
                 <p>Popularity Score: {detailedResults.popularity}</p>
                 <p>Plot Synopsis:</p>
@@ -31,7 +33,9 @@ const MovieWidget = ({ typing, search, query, isFetching, results, error, detail
 
             {results.slice(0, 6).map((movie, idx) =>
                 <div key={movie.release_date} className="eachMovie">
-                    {movie.poster_path ? <img onClick={()=> details(idx)} src={"http://image.tmdb.org/t/p/w185/" + movie.poster_path}></img> : <img alt={movie.title} src={'/poster.png'}></img>}
+                    {movie.poster_path ?
+                        <img onClick={()=> details(idx)} src={"http://image.tmdb.org/t/p/w185/" + movie.poster_path}></img> :
+                        <img onClick={()=> details(idx)} alt={movie.title} src={'/poster.png'}></img>}
                 </div>)}
             </div>}
 
