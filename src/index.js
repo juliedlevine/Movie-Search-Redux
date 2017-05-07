@@ -17,7 +17,7 @@ const store = Redux.createStore(
 );
 
 
-// Movie Widget Container
+// Movie Widget Container connect
 const MovieWidgetContainer = ReactRedux.connect(
     state => ({
         query: state.query,

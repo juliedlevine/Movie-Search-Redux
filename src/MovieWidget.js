@@ -11,16 +11,16 @@ const MovieWidget = ({ typing, search, query, isFetching, results, error, detail
 
         {detailedResults ?
 
-            <div className="results">
+            <div className="results details">
                 <h3>{detailedResults.title}</h3>
                 {detailedResults.poster_path ?
                     <img src={"http://image.tmdb.org/t/p/w185/" + detailedResults.poster_path}></img> :
                     <img alt={detailedResults.title} src={'/poster.png'}></img>}
-                <p>Release Date: {detailedResults.release_date}</p>
-                <p>Popularity Score: {detailedResults.popularity}</p>
-                <p>Plot Synopsis:</p>
+                <p><span className="bold">Release Date:</span> {detailedResults.release_date}</p>
+                <p><span className="bold">Popularity Score:</span> {detailedResults.popularity}</p>
+                <p><span className="bold">Plot Synopsis:</span></p>
                 <p>{detailedResults.overview}</p>
-                <button onClick={back}>Back to results</button>
+                <button className="submitButton" onClick={back}>Back to results</button>
             </div> :
 
             <div className="results">

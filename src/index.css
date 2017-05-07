@@ -42,29 +42,42 @@ body {
 .results img {
     width: 150px;
 }
-
 .results {
-    width: 609px;
+    width: 528px;
     margin: 30px auto;
     color: black;
-    background-color: white;
-    opacity: 0.8;
+    background: rgba(255, 255, 266, 0.9);
     margin: 0 auto;
-    height: 700px;
+    height: 468px;
+    padding: 32px;
 }
 .eachMovie {
-    margin: 10px;
-    padding: 5px;
-    height: 315px;
-    width: 171px;
     float: left;
+    width: 176px;
+    height: 241px;
 }
-.movieText {
-    margin: 15px;
+img:hover {
+    cursor: pointer;
 }
-.movieText p {
-    font-size: 14px;
-    margin: 0px;
+.details {
+    height: 100%;
+}
+.details h3 {
+    margin: 0 0 17px;
+    text-transform: uppercase;
+}
+.details img {
+    margin: 10px;
+}
+.details p {
+    text-align: left;
+    margin: 10px;
+}
+.bold {
+    font-weight: 700;
+}
+.details button {
+    margin-top: 15px;
 }
 .clearfix {
     clear: both;
