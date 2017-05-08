@@ -57,3 +57,28 @@ export function details(idx) {
 export function back() {
     return { type: 'back' }
 }
+
+export function loadInitial(query) {
+    // Do this return function syntax when it's an async action
+    return function(dispatch) {
+        // Make the ajax request
+        $.ajax({
+            url:'https://api.themoviedb.org/3/search/movie?api_key=a1d16adc5c98583172694614c9271635&query=' + query
+        })
+        // When the results come back, wait a second and then dispatch the data to the action
+        .then(data =>
+            dispatch({
+                type: 'search',
+                payload: data.results
+            }))
+        // If there's an error with the ajax request dispatch the error
+        .catch(resp => {
+            let error = resp && resp.responseJSON && resp.responseJSON.message || 'Something went wrong!';
+            dispatch({
+                type: 'search_error',
+                error: error
+
+            })
+        })
+    }
+};

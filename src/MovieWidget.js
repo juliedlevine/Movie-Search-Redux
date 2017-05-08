@@ -1,45 +1,52 @@
+// eslint-disable-next-line
 import React from 'react';
 
-// Parameters should match the connect state and the action functions
-const MovieWidget = ({ typing, search, query, isFetching, results, error, details, detailedResults, back }) =>
-    <div>
-        <img className="film" src="film.png"></img>
-        <h1 className="header">Movie Search!</h1>
-        <input className="searchBox" type="text" onChange={(event) => typing(event)}></input>
-        <input className="submitButton" type="submit" onClick={() => search(query)}></input>
-        <p className="errorMessage">{error}</p>
+export default class MovieWidget extends React.Component {
 
-        {detailedResults ?
+    componentDidMount() {
+        this.props.loadInitial('Apollo 13');
+    }
 
-            <div className="results details">
-                <h3>{detailedResults.title}</h3>
-                {detailedResults.poster_path ?
-                    <img src={"http://image.tmdb.org/t/p/w185/" + detailedResults.poster_path}></img> :
-                    <img alt={detailedResults.title} src={'/poster.png'}></img>}
-                <p><span className="bold">Release Date:</span> {detailedResults.release_date}</p>
-                <p><span className="bold">Popularity Score:</span> {detailedResults.popularity}</p>
-                <p><span className="bold">Plot Synopsis:</span></p>
-                <p>{detailedResults.overview}</p>
-                <button className="submitButton" onClick={back}>Back to results</button>
-            </div> :
+    render() {
+        return (
+            <div>
+                <img className="film" src="film.png"></img>
+                <h1 className="header">Movie Search!</h1>
+                <input className="searchBox" type="text" onChange={(event) => this.props.typing(event)}></input>
+                <input className="submitButton" type="submit" onClick={() => this.props.search(this.props.query)}></input>
+                <p className="errorMessage">{this.props.error}</p>
 
-            <div className="results">
-            {isFetching ?
-                <div className="fetching">
-                    <h3>Fetching movie data...</h3>
-                    <img src="gears.gif"></img>
+                {this.props.detailedResults ?
+
+                    <div className="results details">
+                    <h3>{this.props.detailedResults.title}</h3>
+                    {this.props.detailedResults.poster_path ?
+                        <img alt={this.props.detailedResults.title} src={"http://image.tmdb.org/t/p/w185/" + this.props.detailedResults.poster_path}></img> :
+                        <img alt={this.props.detailedResults.title} src={'/poster.png'}></img>}
+                    <p><span className="bold">Release Date:</span> {this.props.detailedResults.release_date}</p>
+                    <p><span className="bold">Popularity Score:</span> {this.props.detailedResults.popularity}</p>
+                    <p><span className="bold">Plot Synopsis:</span></p>
+                    <p>{this.props.detailedResults.overview}</p>
+                    <button className="submitButton" onClick={this.props.back}>Back to results</button>
                 </div> :
-                <div></div>}
 
-            {results.slice(0, 6).map((movie, idx) =>
-                <div key={movie.release_date} className="eachMovie">
-                    {movie.poster_path ?
-                        <img onClick={()=> details(idx)} src={"http://image.tmdb.org/t/p/w185/" + movie.poster_path}></img> :
-                        <img onClick={()=> details(idx)} alt={movie.title} src={'/poster.png'}></img>}
-                </div>)}
-            </div>}
+                <div className="results">
+                {this.props.isFetching ?
+                    <div className="fetching">
+                        <h3>Fetching movie data...</h3>
+                        <img alt="gears gif" src="gears.gif"></img>
+                    </div> :
+                    <div></div>}
 
-    </div>
+                {this.props.results.slice(0, 6).map((movie, idx) =>
+                    <div className="eachMovie">
+                        {movie.poster_path ?
+                        <img onClick={()=> this.props.details(idx)}src={"http://image.tmdb.org/t/p/w185/" + movie.poster_path}></img> :
+                        <img onClick={()=> this.props.details(idx)}src={'/poster.png'}></img>}
+                     </div>)}
+                 </div>}
 
-
-export default MovieWidget;
+             </div>
+        )
+    }
+}
